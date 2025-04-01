@@ -1,0 +1,163 @@
+#Bienvenue dans mon projet !
+
+import os
+from tkinter import Tk, Listbox, Label, Scrollbar, StringVar, Entry, Button, filedialog, Menu
+
+class FileExplorer:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Explorateur de Fichiers")
+
+        # Barre de chemin
+        self.path_var = StringVar()
+        self.path_bar = Entry(self.root, textvariable=self.path_var, width=80)
+        self.path_bar.pack(pady=5)
+
+        # Liste des fichiers
+        self.file_list = Listbox(self.root, width=80, height=20)
+        self.file_list.pack(side="left", padx=5, pady=5)
+
+        # Barre de défilement
+        self.scrollbar = Scrollbar(self.root)
+        self.scrollbar.pack(side="right", fill="y")
+        self.file_list.config(yscrollcommand=self.scrollbar.set)
+        self.scrollbar.config(command=self.file_list.yview)
+
+        # Boutons
+        self.refresh_button = Button(self.root, text="Actualiser", command=self.display_files)
+        self.refresh_button.pack(pady=5)
+
+        # Menu contextuel
+        self.menu = Menu(self.root, tearoff=0)
+        self.menu.add_command(label="Ouvrir", command=self.open_file)
+        self.menu.add_command(label="Supprimer", command=self.delete_file)
+        
+        self.file_list.bind("<Button-3>", self.show_context_menu)
+        self.file_list.bind("<Double-1>", self.navigate)
+
+        # Chemin initial
+        self.current_path = os.getcwd()
+        self.path_var.set(self.current_path)
+        self.display_files()
+
+    def display_files(self):
+        self.file_list.delete(0, "end")
+        self.current_path = self.path_var.get()
+        try:
+            for item in os.listdir(self.current_path):
+                self.file_list.insert("end", item)
+        except PermissionError:
+            self.file_list.insert("end", "Accès refusé")
+
+    def navigate(self, event):
+        selected = self.file_list.get(self.file_list.curselection())
+        new_path = os.path.join(self.current_path, selected)
+        if os.path.isdir(new_path):
+            self.current_path = new_path
+            self.path_var.set(self.current_path)
+            self.display_files()
+
+    def open_file(self):
+        selected = self.file_list.get(self.file_list.curselection())
+        file_path = os.path.join(self.current_path, selected)
+        if os.path.isfile(file_path):
+            os.startfile(file_path)
+
+    def delete_file(self):
+        selected = self.file_list.get(self.file_list.curselection())
+        file_path = os.path.join(self.current_path, selected)
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+        elif os.path.isdir(file_path):
+            os.rmdir(file_path)
+        self.display_files()
+
+    def show_context_menu(self, event):
+        self.menu.post(event.x_root, event.y_root)
+
+            
+    def create_new_folder(self):
+        new_folder_name = "Nouveau Dossier"
+        new_folder_path = os.path.join(self.current_path, new_folder_name)
+        counter = 1
+        while os.path.exists(new_folder_path):
+            new_folder_path = os.path.join(self.current_path, f"{new_folder_name} ({counter})")
+            counter += 1
+        os.mkdir(new_folder_path)
+        self.display_files()
+       
+        
+        #................................................;
+        
+        self.create_folder_button = Button(self.root, text="Nouveau Dossier", command=self.create_new_folder)
+        self.create_folder_button.pack(pady=5)
+        
+        #...............................................................
+        
+        self.favorites = set()
+
+    def add_to_favorites(self):
+         selected = self.file_list.get(self.file_list.curselection())
+         self.favorites.add(os.path.join(self.current_path, selected))
+         print("Favoris ajoutés :", self.favorites)
+
+    def show_favorites(self):
+         self.file_list.delete(0, "end")
+         for item in self.favorites:
+             self.file_list.insert("end", item)
+            
+    #................................
+             
+             self.favorite_button = Button(self.root, text="Voir Favoris", command=self.show_favorites)
+             self.favorite_button.pack(pady=5)
+
+             self.menu.add_command(label="Ajouter aux Favoris", command=self.add_to_favorites)
+
+    def search_file(self, search_query):
+        self.file_list.delete(0, "end")
+        try:
+            for item in os.listdir(self.current_path):
+                if search_query.lower() in item.lower():
+                    self.file_list.insert("end", item)
+        except PermissionError:
+            self.file_list.insert("end", "Accès refusé")
+
+            self.search_var = StringVar()
+            self.search_bar = Entry(self.root, textvariable=self.search_var, width=40)
+            self.search_bar.pack(pady=5)
+            self.search_button = Button(self.root, text="Rechercher", command=lambda: self.search_file(self.search_var.get()))
+            self.search_button.pack(pady=5)
+
+    from PIL import Image, ImageTk
+
+    def display_files_with_icons(self):
+        self.file_list.delete(0, "end")
+        try:
+            
+            for item in os.listdir(self.current_path):
+                full_path = os.path.join(self.current_path, item)
+                icon = "" if os.path.isdir(full_path) else ""
+                self.file_list.insert("end", f"{icon} {item}")
+        except PermissionError:
+            self.file_list.insert("end", "Accès refusé")
+            
+            #...........................
+            
+            def display_files(self):
+              self.file_list.delete(0, "end")
+              try:
+                for item in os.listdir(self.current_path):
+                    self.file_list.insert("end", item)
+              except PermissionError:
+                self.file_list.insert("end", "Accès refusé")
+                print("Erreur : Accès refusé au répertoire :", self.current_path)
+            
+if __name__ == "__main__":
+                root = Tk()
+                app = FileExplorer(root)
+                       
+root.mainloop()
+    
+    
+    
+
