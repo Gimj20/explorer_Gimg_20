@@ -31,6 +31,8 @@ Cependant, avec l’éditeur de code «Thonny», il a été possible d’install
 ![explorer3](https://github.com/user-attachments/assets/b0adf04b-8691-4f56-9977-5066378175bb)
 ![explorer4](https://github.com/user-attachments/assets/c6899b94-5e1b-4f83-9e59-4bef91b51263)
 
+Lien pour mon script de projet :https://github.com/Gimj20/explorer_Gimg_20/blob/main/mon_script_explorer
+
 
 
 
