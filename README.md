@@ -1,4 +1,6 @@
 # explorer_Gimg_20
+Membres du groupe:
+GOUDJO Joseph, unique membre ayant réalisé ce projet.
 ce depot contient des rapports et des suivis du projet
 
 Difficultés rencontrées
