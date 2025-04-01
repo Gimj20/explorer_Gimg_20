@@ -36,6 +36,22 @@ Cependant, avec l’éditeur de code «Thonny», il a été possible d’install
 Lien pour mon script de projet :https://github.com/Gimj20/explorer_Gimg_20/blob/main/mon_script_explorer
 
 
+![explorer5](https://github.com/user-attachments/assets/e149adbb-5563-4a3f-bbb1-77c52037942e)
+Le chemin C:\Users\a\Documents édité sur la barre d’adresse de l’explorateur de fichiers actualisé( par un clic de souris) par le bouton «Actualiser» nous donne accès aux fichiers et sous-documents que comprend ce chemin.
+
+Un double clic de souris ou un clic droit présentant les options ‘ouvrir’ et  ‘supprimer’ (ici, l’option ‘ouvrir’ est utlisée) nous permet d’ouvrir le fichier powerpoint d’extention «.pptx» dont nous voyons l’image à la droite de l’autre.  
+
+Le bouton ou l’option  «Actualiser» va nous permettre de  rafrachir le contenu du chemin édité dans la barre d’adresse.
+
+
+La barre de défilement nous permet un défilement général ou une vue générale sur l’ensemble du contenu du chemin. Elle est à la fois ascendante et descendante.
+
+![explorer6](https://github.com/user-attachments/assets/f4029b70-315d-477b-9dac-218db936796b)
+
+
+
+
+
 
 
 
